@@ -1,0 +1,20 @@
+{
+   "menu.type_changer.description":"Configure chances of changing a Villagers type:",
+   "menu.type_changer.title.external":"Nice Villager Type Changer",
+   "menu.type_changer.title": "Nice Villager Type Changer: Config",
+   "option.type_changer.confirm": "Confirm",
+   "option.type_changer.desert":"Desert",
+   "option.type_changer.desert_item": "Item To Change To Desert Type",
+   "option.type_changer.jungle":"Jungle",
+   "option.type_changer.jungle_item": "Item To Change To Jungle Type",
+   "option.type_changer.plains":"Plains",
+   "option.type_changer.plains_item": "Item To Change To Plains Type",
+   "option.type_changer.savanna":"Savanna",
+   "option.type_changer.savanna_item": "Item To Change To Savanna Type",
+   "option.type_changer.snow":"Snow",
+   "option.type_changer.snow_item": "Item To Change To Snow Type",
+   "option.type_changer.swamp":"Swamp",
+   "option.type_changer.swamp_item": "Item To Change To Swamp Type",
+   "option.type_changer.taiga":"Taiga",
+   "option.type_changer.taiga_item": "Item To Change To Taiga Type"
+}

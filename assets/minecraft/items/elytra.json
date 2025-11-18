@@ -1,0 +1,36 @@
+{
+  "model": {
+    "type": "minecraft:condition",
+    "on_false": {
+      "type": "minecraft:composite",
+      "models": [
+        {
+          "type": "minecraft:model",
+          "model": "minecraft:item/elytra",
+          "tints": [
+            {
+              "type": "minecraft:dye",
+              "default": [0.78, 0.85, 0.86]
+            }
+          ]
+        }
+      ]
+    },
+    "on_true": {
+      "type": "minecraft:composite",
+      "models": [
+        {
+          "type": "minecraft:model",
+          "model": "minecraft:item/elytra_broken",
+          "tints": [
+            {
+              "type": "minecraft:dye",
+              "default": [0.78, 0.85, 0.86]
+            }
+          ]
+        }
+      ]
+    },
+    "property": "minecraft:broken"
+  }
+}

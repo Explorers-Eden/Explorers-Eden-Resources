@@ -1,0 +1,19 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "fabled_roots:crown_of_roots",
+        "dyeable": {
+          "color_when_undyed": [
+            0.7,
+            0.75,
+            0.78
+          ]
+        }
+      },
+      {
+        "texture": "fabled_roots:crown_of_roots_overlay"
+      }
+    ]
+  }
+}

@@ -1,0 +1,20 @@
+{
+   "menu.type_changer.description": "Налаштування шансів зміни типу селянина:",
+   "menu.type_changer.title.external": "Nice Villager Type Changer",
+   "menu.type_changer.title": "Nice Villager Type Changer: Налаштування",
+   "option.type_changer.confirm": "Підтвердити",
+   "option.type_changer.desert": "Пустеля",
+   "option.type_changer.desert_item": "Предмет для зміни на тип «Пустеля»",
+   "option.type_changer.jungle": "Джунглі",
+   "option.type_changer.jungle_item": "Предмет для зміни на тип «Джунглі»",
+   "option.type_changer.plains": "Рівнини",
+   "option.type_changer.plains_item": "Предмет для зміни на тип «Рівнини»",
+   "option.type_changer.savanna": "Саванна",
+   "option.type_changer.savanna_item": "Предмет для зміни на тип «Саванна»",
+   "option.type_changer.snow": "Сніг",
+   "option.type_changer.snow_item": "Предмет для зміни на тип «Сніг»",
+   "option.type_changer.swamp": "Болото",
+   "option.type_changer.swamp_item": "Предмет для зміни на тип «Болото»",
+   "option.type_changer.taiga": "Тайга",
+   "option.type_changer.taiga_item": "Предмет для зміни на тип «Тайга»"
+}

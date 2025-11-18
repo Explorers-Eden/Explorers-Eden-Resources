@@ -1,0 +1,11 @@
+{
+  "model": {
+    "type": "minecraft:composite",
+    "models": [
+      {
+        "type": "minecraft:model",
+        "model": "minecraft:item/illusioner_spawn_egg"
+      }
+    ]
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "fabled_roots:iron_golem_shell"
+      }
+    ]
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "model": {
+    "type": "minecraft:composite",
+    "models": [
+      {
+        "type": "minecraft:model",
+        "model": "minecraft:item/saddle_overlay"
+      },
+      {
+        "type": "minecraft:model",
+        "model": "minecraft:item/saddle",
+        "tints": [
+          {
+            "type": "minecraft:dye",
+            "default": -6265536
+          }
+        ]
+      }
+    ]
+  }
+}

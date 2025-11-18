@@ -1,0 +1,9 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "fabled_roots:allay_shell"
+      }
+    ]
+  }
+}

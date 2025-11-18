@@ -1,0 +1,20 @@
+{
+   "menu.type_changer.description": "Konfiguriere die Chancen, einen Dorfbewohnertyp zu ändern:",
+   "menu.type_changer.title.external": "Nette-Dorfbewohner Typ Wechsler",
+   "menu.type_changer.title": "Nette-Dorfbewohner Typ Wechsler: Konfiguration",
+   "option.type_changer.confirm": "Bestätigen",
+   "option.type_changer.desert": "Wüste",
+   "option.type_changer.desert_item": "Item um zu Wüstentyp zu wechseln",
+   "option.type_changer.jungle": "Dschungel",
+   "option.type_changer.jungle_item": "Item um zu Dschungeltyp zu wechseln",
+   "option.type_changer.plains": "Ebenen",
+   "option.type_changer.plains_item": "Item um zu Ebenentyp zu wechseln",
+   "option.type_changer.savanna": "Savanne",
+   "option.type_changer.savanna_item": "Item um zu Savannetyp zu wechseln",
+   "option.type_changer.snow": "Schnee",
+   "option.type_changer.snow_item": "Item um zu Schneetyp zu wechseln",
+   "option.type_changer.swamp": "Sumpf",
+   "option.type_changer.swamp_item": "Item um zu Sumpftyp zu wechseln",
+   "option.type_changer.taiga": "Taiga",
+   "option.type_changer.taiga_item": "Item um zu Taigatyp zu wechseln"
+}
