@@ -1,0 +1,21 @@
+{
+  "model": {
+    "type": "minecraft:composite",
+    "models": [
+      {
+        "type": "minecraft:model",
+        "model": "nice_things:item/biome_brew_overlay"
+      },
+      {
+        "type": "minecraft:model",
+        "model": "nice_things:item/biome_brew",
+        "tints": [
+          {
+            "type": "minecraft:dye",
+            "default": 13565415
+          }
+        ]
+      }
+    ]
+  }
+}

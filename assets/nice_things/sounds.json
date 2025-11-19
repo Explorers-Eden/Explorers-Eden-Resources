@@ -1,0 +1,12 @@
+{
+      "music_disc.ambient.forest": {
+        "sounds": [
+            "nice_things:forest_ambient"
+        ]
+      },
+      "music_disc.ambient.ocean": {
+        "sounds": [
+            "nice_things:ocean_ambient"
+        ]
+      }
+}

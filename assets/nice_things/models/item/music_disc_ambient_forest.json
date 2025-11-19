@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "nice_things:item/music_disc_ambient_forest"
+  }
+}
