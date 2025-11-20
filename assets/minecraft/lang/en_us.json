@@ -8,5 +8,14 @@
     "enchantment.level.7": "§4VII",
     "enchantment.level.8": "§4VIII",
     "enchantment.level.9": "§4IX",
-    "enchantment.level.10": "§4X"
+    "enchantment.level.10": "§4X",
+    "chat.type.announcement": "%s: %s",
+    "chat.type.team.sent": "👥 %s: %s",
+    "chat.type.team.text": "👥 %s: %s",
+    "chat.type.text": "%s: %s",
+    "commands.message.display.incoming": "📨 %s: %s",
+    "commands.message.display.outgoing": "✎ %s: %s",
+    "multiplayer.player.joined": "",
+    "multiplayer.player.joined.renamed": "%s was formerly known as %s",
+    "multiplayer.player.left": "%s went off enjoying other things."
 }

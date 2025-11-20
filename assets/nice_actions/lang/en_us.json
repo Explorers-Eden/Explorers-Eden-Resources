@@ -107,6 +107,7 @@
    "text.nice_actions.rtp_successful": "Teleported randomly.",
    "text.nice_actions.tp_spawn_successful": "Teleported to spawn.",
    "text.nice_actions.set_home_successful": "Home successfully set to current position.",
+   "text.nice_actions.no_home": "You have no home set yet.",
    "text.nice_actions.tp_home_successful": "Teleported back home.",
    "text.nice_actions.insufficient_level": "Insufficient EXP Level",
    "text.nice_actions.no_horse_within_reach": "No Horse within 8 blocks.",
