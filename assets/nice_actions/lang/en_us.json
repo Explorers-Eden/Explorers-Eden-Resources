@@ -101,6 +101,9 @@
    "option.nice_actions.events.fishing": "Fishing",
    "option.nice_actions.events.killing": "Killing",
 
+   "text.nice_actions.pos_last_grave": "Position of Last Grave:",
+   "text.nice_actions.last_grave_looted": "Already Looted",
+   "text.nice_actions.last_grave_unlooted": "Not Looted Yet",
    "text.nice_actions.rtp_cooldown": "Random teleport is on cooldown",
    "text.nice_actions.tp_spawn_cooldown": "Teleport to Spawn is on cooldown.",
    "text.nice_actions.tp_home_cooldown": "Home teleport is on cooldown.",
