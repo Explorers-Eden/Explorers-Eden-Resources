@@ -15,7 +15,7 @@
     "chat.type.text": "%s: %s",
     "commands.message.display.incoming": "📨 %s: %s",
     "commands.message.display.outgoing": "✎ %s: %s",
-    "multiplayer.player.joined": "",
-    "multiplayer.player.joined.renamed": "%s was formerly known as %s",
-    "multiplayer.player.left": "%s went off enjoying other things."
+    "multiplayer.player.joined": "%s hopped in - may your day be as lovely as your builds!",
+    "multiplayer.player.joined.renamed": "%s changed their name to %s.",
+    "multiplayer.player.left": "%s disconnected - the server keeps their seat warm."
 }
