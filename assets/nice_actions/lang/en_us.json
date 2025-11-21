@@ -65,6 +65,7 @@
    "option.nice_actions.stats": "Share Stats",
    "option.nice_actions.stats.tooltip": "Share your stats with players nearby (32 blocks).",
    "option.nice_actions.events": "Event Participation",
+   "option.nice_actions.events.config": "Events",
    "option.nice_actions.events.tooltip": "Decide if you wanna take part in random events.",
    "option.nice_actions.stats.kills": "Hostile Mob Kills",
    "option.nice_actions.stats.mined": "Mined Blocks",
