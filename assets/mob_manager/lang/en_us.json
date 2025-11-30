@@ -46,6 +46,8 @@
     "menu.mob_manager.equipment.misc.description":"Configure Slot:",
 
     "option.mob_manager.villager.follow": "Villager Follow Players Holding Emerald",
+    "option.mob_manager.villager_pet": "Villager Pet Chance",
+    "option.mob_manager.allow_mob": "Allow Mob",
     "option.mob_manager.main.passive.tooltip": "Customize settings for either all or specific passive mobs.",
     "option.mob_manager.all_hostile_mobs": "All Hostile Mobs",
     "option.mob_manager.all_hostile.tooltip": "Configuring all hostile mobs will override any settings for individual hostile mobs you did before!",

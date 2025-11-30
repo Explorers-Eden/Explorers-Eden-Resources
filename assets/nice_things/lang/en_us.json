@@ -28,6 +28,9 @@
    "item.nice_things.biome_brew.pumpkin": "Pumpkin Biome Brew",
    "item.nice_things.biome_brew.void": "Void Biome Brew",
    "item.nice_things.biome_brew.cotton": "Cotton Biome Brew",
+   "item.nice_things.biome_brew.desert": "Desert Biome Brew",
+   "item.nice_things.biome_brew.crimson_forest": "Crimson Forest Biome Brew",
+   "item.nice_things.biome_brew.warped_forest": "Warped Forest Biome Brew",
 
    "block.nice_things.fan": "Fan",
    "block.nice_things.chopper": "Chopper",
