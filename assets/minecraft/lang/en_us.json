@@ -17,5 +17,7 @@
     "commands.message.display.outgoing": "✎ %s: %s",
     "multiplayer.player.joined": "%s hopped in - may your day be as lovely as your builds!",
     "multiplayer.player.joined.renamed": "%s changed their name to %s.",
-    "multiplayer.player.left": "%s disconnected - the server keeps their seat warm."
+    "multiplayer.player.left": "%s disconnected - the server keeps their seat warm.",
+    "menu.custom_options": "A Realm Recrafted",
+    "menu.custom_options.title": "A Realm Recrafted"
 }
