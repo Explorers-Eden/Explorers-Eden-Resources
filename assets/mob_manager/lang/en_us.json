@@ -98,7 +98,7 @@
     "option.mob_manager.locator_color":"Locator Bar Color (Hex)",
     "option.mob_manager.locator_assets": "Spawn Egg Locator Bar Icons",
     "option.mob_manager.mobs_on_locator_bar":"Mobs Show On Locator Bar",
-    "option.mob_manager.need_sky":"Scaling Only On Surface",
+    "option.mob_manager.need_sky":"Scaling/Rarity Only On Surface",
     "option.mob_manager.skeletonhorsetrap":"Skeleton Horse Traps",
     "option.mob_manager.shulkercolor":"Random Shulker Color",
     "option.mob_manager.irongolemanger":"Iron Golem Angry At Player",
