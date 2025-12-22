@@ -16,6 +16,8 @@
    "menu.nice_actions.config.misc.description": "Configure Miscellaneous Action Settings:",
    "menu.nice_actions.config.event.misc.description": "Configure Miscellaneous Event Settings:",
 
+   "option.nice_actions.transfer_enchantments": "Transfer Enchantments",
+   "option.nice_actions.transfer_enchantments.tooltip": "Transfers enchantments from the item in your offhand to the item in the mainhand.\n\nDestroys the offhand item in the process.\n\nThe offhand item must not be an Enchanted Book.\n\nThe mainhand item must not already be enchanted.\n\nMainhand item has to be the same type as offhand item.",
    "option.nice_actions.option.max_amount": "Max Amount Needed",
    "option.nice_actions.chance": "Event Chance",
    "option.nice_actions.events.loot_table": "Reward Loot Table",
@@ -102,6 +104,13 @@
    "option.nice_actions.events.fishing": "Fishing",
    "option.nice_actions.events.killing": "Killing",
 
+   "text.nice_actions.transfer_enchantments_succes": "Enchantments succesfully transferred.",
+   "text.nice_actions.transfer_enchantments_failed_generic": "Mainhand item cannot be enchanted with your offhand item.",
+   "text.nice_actions.transfer_enchantments_failed_mainhand_has_enchant": "Mainhand item already enchanted.",
+   "text.nice_actions.transfer_enchantments_failed_offhand_no_enchant": "Offhand item not enchanted.",
+   "text.nice_actions.transfer_enchantments_failed_mainhand_no_item": "No item in mainhand",
+   "text.nice_actions.transfer_enchantments_failed_offhand_no_item": "No item in offhand",
+   "text.transfer_enchantments_failed_mainhand_books": "More than one Book in mainhand.",
    "text.nice_actions.pos_last_grave": "Position of Last Grave:",
    "text.nice_actions.last_grave_looted": "Already Looted",
    "text.nice_actions.last_grave_unlooted": "Not Looted Yet",
