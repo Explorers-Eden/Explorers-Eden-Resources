@@ -20,7 +20,7 @@
     "option.keepinv.restore_inv.item_type": "Items",
     "option.keepinv.restore_inv.item_type.on_ground": "On Ground",
     "option.keepinv.restore_inv.item_type.shulker": "In Shulker Box",
-    "option.keepinv.restore_inv.playername_input": "Insert Playername Below:",
+    "option.keepinv.restore_inv.playername_input": "Enter Playername Below:",
     "option.keepinv.back": "Back",
     "option.keepinv.confirm": "Confirm",
     "option.keepinv.enabled": "Enabled",
