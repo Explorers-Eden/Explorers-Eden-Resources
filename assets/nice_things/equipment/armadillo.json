@@ -4,6 +4,11 @@
       {
         "texture": "nice_things:armadillo"
       }
+    ],
+    "humanoid_baby": [
+      {
+        "texture": "nice_things:armadillo"
+      }
     ]
   }
 }

@@ -4,6 +4,11 @@
       {
         "texture": "fabled_roots:ghast_shell"
       }
+    ],
+    "humanoid_baby": [
+      {
+        "texture": "fabled_roots:ghast_shell"
+      }
     ]
   }
 }
