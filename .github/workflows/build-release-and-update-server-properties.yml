@@ -1,0 +1,184 @@
+name: Build Release and Update Resource Pack
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-release-update:
+    runs-on: ubuntu-latest
+
+    env:
+      PACK_ZIP_NAME: explorers-eden-resources.zip
+      RELEASE_TAG: resource-pack-latest
+      RELEASE_TITLE: Latest Resource Pack
+      REMOTE_SERVER_PROPERTIES: /srv/docker/crafty-4/servers/bb1e3d6f-d50b-48d7-84df-8b959126b4c9/server.properties
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Python dependency
+        run: pip install paramiko
+
+      - name: Build resource pack zip
+        run: |
+          python - <<'PY'
+          import os
+          import zipfile
+
+          output_name = os.environ["PACK_ZIP_NAME"]
+          required = ["assets", "pack.mcmeta", "pack.png"]
+
+          for path in required:
+              if not os.path.exists(path):
+                  raise FileNotFoundError(f"Required path missing: {path}")
+
+          with zipfile.ZipFile(output_name, "w", zipfile.ZIP_DEFLATED) as zf:
+              for root, _, files in os.walk("assets"):
+                  for file in files:
+                      full_path = os.path.join(root, file)
+                      arcname = os.path.relpath(full_path, ".")
+                      zf.write(full_path, arcname)
+
+              zf.write("pack.mcmeta", "pack.mcmeta")
+              zf.write("pack.png", "pack.png")
+
+          print(f"Created {output_name}")
+          PY
+
+      - name: Compute SHA1
+        id: sha1
+        run: |
+          python - <<'PY'
+          import hashlib
+          import os
+
+          filename = os.environ["PACK_ZIP_NAME"]
+          sha1 = hashlib.sha1()
+
+          with open(filename, "rb") as f:
+              for chunk in iter(lambda: f.read(8192), b""):
+                  sha1.update(chunk)
+
+          digest = sha1.hexdigest()
+
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as out:
+              out.write(f"sha1={digest}\n")
+
+          print(digest)
+          PY
+
+      - name: Upload workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: resource-pack
+          path: ${{ env.PACK_ZIP_NAME }}
+
+      - name: Create or update GitHub release and upload asset
+        id: release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+
+          TAG="${RELEASE_TAG}"
+          TITLE="${RELEASE_TITLE}"
+          FILE="${PACK_ZIP_NAME}"
+
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "Release exists, updating asset"
+          else
+            gh release create "$TAG" \
+              --title "$TITLE" \
+              --notes "Automated release for the latest resource pack."
+          fi
+
+          gh release upload "$TAG" "$FILE" --clobber
+
+          REPO="${{ github.repository }}"
+          URL="https://github.com/${REPO}/releases/download/${TAG}/${FILE}"
+
+          echo "resource_pack_url=$URL" >> "$GITHUB_OUTPUT"
+          echo "Release asset URL: $URL"
+
+      - name: Fetch, update, and upload server.properties
+        env:
+          SFTP_HOST: ${{ secrets.SFTP_HOST }}
+          SFTP_PORT: ${{ secrets.SFTP_PORT }}
+          SFTP_USER: ${{ secrets.SFTP_USER }}
+          SFTP_PASS: ${{ secrets.SFTP_PASS }}
+          RESOURCE_PACK_URL: ${{ steps.release.outputs.resource_pack_url }}
+          RESOURCE_PACK_SHA1: ${{ steps.sha1.outputs.sha1 }}
+        run: |
+          python - <<'PY'
+          import os
+          import paramiko
+
+          host = os.environ["SFTP_HOST"]
+          port = int(os.environ.get("SFTP_PORT", "22"))
+          user = os.environ["SFTP_USER"]
+          password = os.environ["SFTP_PASS"]
+
+          remote_path = os.environ["REMOTE_SERVER_PROPERTIES"]
+          local_path = "server.properties"
+
+          resource_pack_url = os.environ["RESOURCE_PACK_URL"]
+          resource_pack_sha1 = os.environ["RESOURCE_PACK_SHA1"]
+
+          if not all([host, user, password, resource_pack_url, resource_pack_sha1]):
+              raise RuntimeError("Missing one or more required environment variables or secrets.")
+
+          transport = paramiko.Transport((host, port))
+          try:
+              transport.connect(username=user, password=password)
+              sftp = paramiko.SFTPClient.from_transport(transport)
+
+              sftp.get(remote_path, local_path)
+              print(f"Downloaded {remote_path}")
+
+              with open(local_path, "r", encoding="utf-8") as f:
+                  lines = f.readlines()
+
+              found_pack = False
+              found_sha1 = False
+              new_lines = []
+
+              for line in lines:
+                  stripped = line.rstrip("\n")
+
+                  if stripped.startswith("resource-pack="):
+                      new_lines.append(f"resource-pack={resource_pack_url}\n")
+                      found_pack = True
+                  elif stripped.startswith("resource-pack-sha1="):
+                      new_lines.append(f"resource-pack-sha1={resource_pack_sha1}\n")
+                      found_sha1 = True
+                  else:
+                      new_lines.append(line)
+
+              if not found_pack:
+                  new_lines.append(f"resource-pack={resource_pack_url}\n")
+
+              if not found_sha1:
+                  new_lines.append(f"resource-pack-sha1={resource_pack_sha1}\n")
+
+              with open(local_path, "w", encoding="utf-8") as f:
+                  f.writelines(new_lines)
+
+              sftp.put(local_path, remote_path)
+              print(f"Uploaded updated {remote_path}")
+
+              sftp.close()
+          finally:
+              transport.close()
+          PY
