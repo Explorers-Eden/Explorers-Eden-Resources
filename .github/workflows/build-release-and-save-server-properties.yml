@@ -1,4 +1,4 @@
-name: Build Release and Update Resource Pack
+name: Build Release and Save Server Properties
 
 on:
   push:
@@ -22,6 +22,8 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -79,12 +81,6 @@ jobs:
           print(digest)
           PY
 
-      - name: Upload workflow artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: resource-pack
-          path: ${{ env.PACK_ZIP_NAME }}
-
       - name: Create or update GitHub release and upload asset
         id: release
         env:
@@ -112,7 +108,7 @@ jobs:
           echo "resource_pack_url=$URL" >> "$GITHUB_OUTPUT"
           echo "Release asset URL: $URL"
 
-      - name: Fetch, update, and upload server.properties
+      - name: Download and update server.properties
         env:
           SFTP_HOST: ${{ secrets.SFTP_HOST }}
           SFTP_PORT: ${{ secrets.SFTP_PORT }}
@@ -145,40 +141,54 @@ jobs:
               sftp = paramiko.SFTPClient.from_transport(transport)
 
               sftp.get(remote_path, local_path)
-              print(f"Downloaded {remote_path}")
-
-              with open(local_path, "r", encoding="utf-8") as f:
-                  lines = f.readlines()
-
-              found_pack = False
-              found_sha1 = False
-              new_lines = []
-
-              for line in lines:
-                  stripped = line.rstrip("\n")
-
-                  if stripped.startswith("resource-pack="):
-                      new_lines.append(f"resource-pack={resource_pack_url}\n")
-                      found_pack = True
-                  elif stripped.startswith("resource-pack-sha1="):
-                      new_lines.append(f"resource-pack-sha1={resource_pack_sha1}\n")
-                      found_sha1 = True
-                  else:
-                      new_lines.append(line)
-
-              if not found_pack:
-                  new_lines.append(f"resource-pack={resource_pack_url}\n")
-
-              if not found_sha1:
-                  new_lines.append(f"resource-pack-sha1={resource_pack_sha1}\n")
-
-              with open(local_path, "w", encoding="utf-8") as f:
-                  f.writelines(new_lines)
-
-              sftp.put(local_path, remote_path)
-              print(f"Uploaded updated {remote_path}")
+              print(f"Downloaded {remote_path} to repo root as {local_path}")
 
               sftp.close()
           finally:
               transport.close()
+
+          with open(local_path, "r", encoding="utf-8") as f:
+              lines = f.readlines()
+
+          found_pack = False
+          found_sha1 = False
+          new_lines = []
+
+          for line in lines:
+              stripped = line.rstrip("\n")
+
+              if stripped.startswith("resource-pack="):
+                  new_lines.append(f"resource-pack={resource_pack_url}\n")
+                  found_pack = True
+              elif stripped.startswith("resource-pack-sha1="):
+                  new_lines.append(f"resource-pack-sha1={resource_pack_sha1}\n")
+                  found_sha1 = True
+              else:
+                  new_lines.append(line)
+
+          if not found_pack:
+              new_lines.append(f"resource-pack={resource_pack_url}\n")
+
+          if not found_sha1:
+              new_lines.append(f"resource-pack-sha1={resource_pack_sha1}\n")
+
+          with open(local_path, "w", encoding="utf-8") as f:
+              f.writelines(new_lines)
+
+          print("Updated root/server.properties")
           PY
+
+      - name: Commit updated server.properties to main
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add server.properties
+
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+
+          git commit -m "Update server.properties resource pack link"
+          git push origin HEAD:main
