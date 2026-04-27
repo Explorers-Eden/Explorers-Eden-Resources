@@ -80,6 +80,23 @@ jobs:
           echo "Final assets folder contents:"
           find assets -maxdepth 2 -type d | sort
 
+      - name: Commit refreshed assets to repository
+        run: |
+          set -euo pipefail
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add assets
+
+          if git diff --cached --quiet; then
+            echo "No asset changes to commit"
+          else
+            git commit -m "Update merged resource pack assets"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
+
       - name: Build resource pack zip
         run: |
           python - <<'PY'
@@ -238,4 +255,5 @@ jobs:
           fi
 
           git commit -m "Update server.properties resource pack link"
+          git pull --rebase origin main
           git push origin HEAD:main
