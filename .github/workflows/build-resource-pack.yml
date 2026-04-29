@@ -33,144 +33,23 @@ jobs:
       - name: Update assets from source repos
         env:
           REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
-        run: |
-          set -euo pipefail
-
-          if [ -z "${REPO_TOKEN:-}" ]; then
-            echo "REPO_TOKEN secret is missing"
-            exit 1
-          fi
-
-          echo "Removing existing local assets folder before syncing"
-          rm -rf assets
-          mkdir -p assets
-
-          WORKDIR="$(mktemp -d)"
-
-          repos=(
-            "Explorers-Eden/Nice-Actions"
-            "Explorers-Eden/Katters_Structures"
-            "Explorers-Eden/Enchantments-Encore"
-            "Explorers-Eden/Fabled-Roots"
-            "Explorers-Eden/Warping-Wonders"
-            "Explorers-Eden/Nice-Mob-Variants"
-            "Explorers-Eden/Nice-Keep-Inventory"
-            "Explorers-Eden/Nice-Mob-Manager"
-            "Explorers-Eden/Nice-Things"
-            "Explorers-Eden/A-Realm-Recrafted"
-            "Explorers-Eden/Nice-Name-Tags"
-            "Explorers-Eden/Nice-Admin-Tools"
-          )
-
-          for repo in "${repos[@]}"; do
-            name="${repo##*/}"
-            target="$WORKDIR/$name"
-
-            echo "Checking $repo"
-            git clone --depth 1 "https://x-access-token:${REPO_TOKEN}@github.com/${repo}.git" "$target"
-
-            if [ -d "$target/assets" ]; then
-              echo "Copying assets from $repo"
-              rsync -a "$target/assets/" "assets/"
-            else
-              echo "Skipping $repo because it has no assets folder"
-            fi
-          done
-
-          echo "Final assets folder contents:"
-          find assets -maxdepth 2 -type d | sort
+        run: bash scripts/update-resource-pack-assets.sh
 
       - name: Commit refreshed assets to repository
-        run: |
-          set -euo pipefail
-
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
-          git add assets
-
-          if git diff --cached --quiet; then
-            echo "No asset changes to commit"
-          else
-            git commit -m "Update merged resource pack assets"
-            git pull --rebase origin main
-            git push origin HEAD:main
-          fi
+        run: bash scripts/commit-refreshed-assets.sh
 
       - name: Build resource pack zip
-        run: |
-          python - <<'PY'
-          import os
-          import zipfile
-
-          output_name = os.environ["PACK_ZIP_NAME"]
-          required = ["assets", "pack.mcmeta", "pack.png"]
-
-          for path in required:
-              if not os.path.exists(path):
-                  raise FileNotFoundError(f"Required path missing: {path}")
-
-          with zipfile.ZipFile(output_name, "w", zipfile.ZIP_DEFLATED) as zf:
-              for root, _, files in os.walk("assets"):
-                  for file in files:
-                      full_path = os.path.join(root, file)
-                      arcname = os.path.relpath(full_path, ".")
-                      zf.write(full_path, arcname)
-
-              zf.write("pack.mcmeta", "pack.mcmeta")
-              zf.write("pack.png", "pack.png")
-
-          print(f"Created {output_name}")
-          PY
+        run: python scripts/build-resource-pack-zip.py
 
       - name: Compute SHA1
         id: sha1
-        run: |
-          python - <<'PY'
-          import hashlib
-          import os
-
-          filename = os.environ["PACK_ZIP_NAME"]
-          sha1 = hashlib.sha1()
-
-          with open(filename, "rb") as f:
-              for chunk in iter(lambda: f.read(8192), b""):
-                  sha1.update(chunk)
-
-          digest = sha1.hexdigest()
-
-          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as out:
-              out.write(f"sha1={digest}\n")
-
-          print(digest)
-          PY
+        run: python scripts/compute-resource-pack-sha1.py
 
       - name: Create or update GitHub release and upload asset
         id: release
         env:
           GH_TOKEN: ${{ github.token }}
-        run: |
-          set -euo pipefail
-
-          TAG="${RELEASE_TAG}"
-          TITLE="${RELEASE_TITLE}"
-          FILE="${PACK_ZIP_NAME}"
-
-          if gh release view "$TAG" >/dev/null 2>&1; then
-            echo "Release exists, updating asset"
-          else
-            gh release create "$TAG" \
-              --title "$TITLE" \
-              --notes "Automated release for the latest resource pack."
-          fi
-
-          gh release upload "$TAG" "$FILE" --clobber
-
-          REPO="${{ github.repository }}"
-          URL="https://github.com/${REPO}/releases/download/${TAG}/${FILE}"
-
-          echo "resource_pack_url=$URL" >> "$GITHUB_OUTPUT"
-          echo "Release asset URL: $URL"
+        run: bash scripts/update-resource-pack-release.sh "${{ github.repository }}"
 
       - name: Download and update server.properties
         env:
@@ -180,80 +59,7 @@ jobs:
           SFTP_PASS: ${{ secrets.SFTP_PASS }}
           RESOURCE_PACK_URL: ${{ steps.release.outputs.resource_pack_url }}
           RESOURCE_PACK_SHA1: ${{ steps.sha1.outputs.sha1 }}
-        run: |
-          python - <<'PY'
-          import os
-          import paramiko
-
-          host = os.environ["SFTP_HOST"]
-          port = int(os.environ.get("SFTP_PORT", "22"))
-          user = os.environ["SFTP_USER"]
-          password = os.environ["SFTP_PASS"]
-
-          remote_path = os.environ["REMOTE_SERVER_PROPERTIES"]
-          local_path = "server.properties"
-
-          resource_pack_url = os.environ["RESOURCE_PACK_URL"]
-          resource_pack_sha1 = os.environ["RESOURCE_PACK_SHA1"]
-
-          if not all([host, user, password, resource_pack_url, resource_pack_sha1]):
-              raise RuntimeError("Missing one or more required environment variables or secrets.")
-
-          transport = paramiko.Transport((host, port))
-          try:
-              transport.connect(username=user, password=password)
-              sftp = paramiko.SFTPClient.from_transport(transport)
-
-              sftp.get(remote_path, local_path)
-              print(f"Downloaded {remote_path} to repo root as {local_path}")
-
-              sftp.close()
-          finally:
-              transport.close()
-
-          with open(local_path, "r", encoding="utf-8") as f:
-              lines = f.readlines()
-
-          found_pack = False
-          found_sha1 = False
-          new_lines = []
-
-          for line in lines:
-              stripped = line.rstrip("\n")
-
-              if stripped.startswith("resource-pack="):
-                  new_lines.append(f"resource-pack={resource_pack_url}\n")
-                  found_pack = True
-              elif stripped.startswith("resource-pack-sha1="):
-                  new_lines.append(f"resource-pack-sha1={resource_pack_sha1}\n")
-                  found_sha1 = True
-              else:
-                  new_lines.append(line)
-
-          if not found_pack:
-              new_lines.append(f"resource-pack={resource_pack_url}\n")
-
-          if not found_sha1:
-              new_lines.append(f"resource-pack-sha1={resource_pack_sha1}\n")
-
-          with open(local_path, "w", encoding="utf-8") as f:
-              f.writelines(new_lines)
-
-          print("Updated root/server.properties")
-          PY
+        run: python scripts/update-server-properties.py
 
       - name: Commit updated server.properties to main
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
-          git add server.properties
-
-          if git diff --cached --quiet; then
-            echo "No changes to commit"
-            exit 0
-          fi
-
-          git commit -m "Update server.properties resource pack link"
-          git pull --rebase origin main
-          git push origin HEAD:main
+        run: bash scripts/commit-server-properties.sh
