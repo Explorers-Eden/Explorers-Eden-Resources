@@ -6,37 +6,42 @@ on:
 permissions:
   contents: write
 
+env:
+  PACK_ZIP_NAME: explorers-eden-resources.zip
+  RELEASE_TAG: resource-pack-latest
+  RELEASE_TITLE: Latest Resource Pack
+  REMOTE_SERVER_PROPERTIES: /srv/docker/crafty-4/servers/bb1e3d6f-d50b-48d7-84df-8b959126b4c9/server.properties
+
 jobs:
-  build-release-update:
+  sync-assets:
     runs-on: ubuntu-latest
-
-    env:
-      PACK_ZIP_NAME: explorers-eden-resources.zip
-      RELEASE_TAG: resource-pack-latest
-      RELEASE_TITLE: Latest Resource Pack
-      REMOTE_SERVER_PROPERTIES: /srv/docker/crafty-4/servers/bb1e3d6f-d50b-48d7-84df-8b959126b4c9/server.properties
-
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-
-      - name: Install Python dependency
-        run: pip install paramiko
 
       - name: Update assets from source repos
         env:
           REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
         run: bash scripts/update-resource-pack-assets.sh
 
-      - name: Commit refreshed assets to repository
+      - name: Commit refreshed assets
         run: bash scripts/commit-refreshed-assets.sh
+
+  build-and-release:
+    needs: sync-assets
+    runs-on: ubuntu-latest
+    outputs:
+      resource_pack_url: ${{ steps.release.outputs.resource_pack_url }}
+      resource_pack_sha1: ${{ steps.sha1.outputs.sha1 }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
 
       - name: Build resource pack zip
         run: python scripts/build-resource-pack-zip.py
@@ -45,21 +50,37 @@ jobs:
         id: sha1
         run: python scripts/compute-resource-pack-sha1.py
 
-      - name: Create or update GitHub release and upload asset
+      - name: Create or update release
         id: release
         env:
           GH_TOKEN: ${{ github.token }}
         run: bash scripts/update-resource-pack-release.sh "${{ github.repository }}"
 
-      - name: Download and update server.properties
+  update-server:
+    needs: build-and-release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install paramiko
+
+      - name: Update server.properties via SFTP
         env:
           SFTP_HOST: ${{ secrets.SFTP_HOST }}
           SFTP_PORT: ${{ secrets.SFTP_PORT }}
           SFTP_USER: ${{ secrets.SFTP_USER }}
           SFTP_PASS: ${{ secrets.SFTP_PASS }}
-          RESOURCE_PACK_URL: ${{ steps.release.outputs.resource_pack_url }}
-          RESOURCE_PACK_SHA1: ${{ steps.sha1.outputs.sha1 }}
+          RESOURCE_PACK_URL: ${{ needs.build-and-release.outputs.resource_pack_url }}
+          RESOURCE_PACK_SHA1: ${{ needs.build-and-release.outputs.resource_pack_sha1 }}
         run: python scripts/update-server-properties.py
 
-      - name: Commit updated server.properties to main
+      - name: Commit updated server.properties
         run: bash scripts/commit-server-properties.sh
