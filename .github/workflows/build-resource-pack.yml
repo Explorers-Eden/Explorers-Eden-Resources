@@ -16,7 +16,7 @@ jobs:
   sync-assets:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4.2.2
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
@@ -35,11 +35,11 @@ jobs:
       resource_pack_url: ${{ steps.release.outputs.resource_pack_url }}
       resource_pack_sha1: ${{ steps.sha1.outputs.sha1 }}
     steps:
-      - uses: actions/checkout@v4.2.2
+      - uses: actions/checkout@v7
         with:
           ref: main
 
-      - uses: actions/setup-python@v5.6.0
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.11"
 
@@ -60,12 +60,12 @@ jobs:
     needs: build-and-release
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4.2.2
+      - uses: actions/checkout@v7
         with:
           ref: main
           fetch-depth: 0
 
-      - uses: actions/setup-python@v5.6.0
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.11"
 
