@@ -1,0 +1,75 @@
+{
+    "targets": {
+        "swap": {}
+    },
+    "passes": [
+        {
+            "vertex_shader": "minecraft:core/screenquad",
+            "fragment_shader": "eden:post/outer_wilds_warning",
+            "inputs": [
+                {
+                    "sampler_name": "In",
+                    "target": "minecraft:main",
+                    "bilinear": true
+                },
+                {
+                    "sampler_name": "Icon",
+                    "location": "eden:outer_wilds_warning",
+                    "width": 128,
+                    "height": 128,
+                    "bilinear": false
+                }
+            ],
+            "output": "swap",
+            "uniforms": {
+                "WarningConfig": [
+                    {
+                        "name": "IconSize",
+                        "type": "vec2",
+                        "value": [128.0, 128.0]
+                    },
+                    {
+                        "name": "Margin",
+                        "type": "vec2",
+                        "value": [16.0, 16.0]
+                    },
+                    {
+                        "name": "FadeSeconds",
+                        "type": "float",
+                        "value": 5.0
+                    },
+                    {
+                        "name": "HoldSeconds",
+                        "type": "float",
+                        "value": 300.0
+                    },
+                    {
+                        "name": "WaitSeconds",
+                        "type": "float",
+                        "value": 150.0
+                    }
+                ]
+            }
+        },
+        {
+            "vertex_shader": "minecraft:core/screenquad",
+            "fragment_shader": "minecraft:post/blit",
+            "inputs": [
+                {
+                    "sampler_name": "In",
+                    "target": "swap"
+                }
+            ],
+            "uniforms": {
+                "BlitConfig": [
+                    {
+                        "name": "ColorModulate",
+                        "type": "vec4",
+                        "value": [1.0, 1.0, 1.0, 1.0]
+                    }
+                ]
+            },
+            "output": "minecraft:main"
+        }
+    ]
+}

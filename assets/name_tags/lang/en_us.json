@@ -1,0 +1,16 @@
+{
+  "advancement.eden.adventure.nice_name_tags.chapter.title": "Magic Words",
+  "advancement.eden.adventure.nice_name_tags.chapter.description": "Use a name tag magic word on an entity for the first time.",
+  "advancement.eden.adventure.nice_name_tags.silence.title": "Silence!",
+  "advancement.eden.adventure.nice_name_tags.silence.description": "Mute an entity with a name tag.",
+  "advancement.eden.adventure.nice_name_tags.identity_crisis.title": "Identity Crisis",
+  "advancement.eden.adventure.nice_name_tags.identity_crisis.description": "Turn a villager through all 7 biome variants using name tags.",
+  "advancement.eden.adventure.nice_name_tags.old_tricks.title": "Old Tricks",
+  "advancement.eden.adventure.nice_name_tags.old_tricks.description": "Rename mobs with the classic vanilla tricks: jeb_ on a Sheep, Dinnerbone or Grumm on any mob, and Toast on a Rabbit.",
+  "advancement.eden.adventure.nice_name_tags.ghost_mode.title": "Ghost Mode",
+  "advancement.eden.adventure.nice_name_tags.ghost_mode.description": "Turn off an entity's collision with a name tag.",
+  "advancement.eden.adventure.nice_name_tags.solid_ground.title": "Solid Ground",
+  "advancement.eden.adventure.nice_name_tags.solid_ground.description": "Turn an entity's collision back on with a name tag.",
+  "advancement.eden.adventure.nice_name_tags.cold_feet.title": "Cold Feet",
+  "advancement.eden.adventure.nice_name_tags.cold_feet.description": "Stop a Piglin, Piglin Brute, or Hoglin from zombifying with a name tag."
+}
