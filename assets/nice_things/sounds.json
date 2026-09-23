@@ -8,5 +8,10 @@
         "sounds": [
             "nice_things:ocean_ambient"
         ]
+      },
+      "music_disc.melancholia": {
+        "sounds": [
+            "nice_things:melancholia"
+        ]
       }
 }
