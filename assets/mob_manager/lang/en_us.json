@@ -74,6 +74,7 @@
     "option.mob_manager.rarity_mobs.validmobs": "Entity Tag List For Valid Mob Types",
     "option.mob_manager.rarity_mobs.loottable": "On Death Loot Table",
     "option.mob_manager.confirm": "Confirm",
+    "option.mob_manager.close": "Close",
     "option.mob_manager.commandfeedback": "Send Command Feedback",
     "option.mob_manager.insomnia": "Phantom Spawning",
     "option.mob_manager.warden": "Warden Spawning",
