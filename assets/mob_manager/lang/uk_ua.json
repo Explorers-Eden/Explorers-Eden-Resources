@@ -196,5 +196,6 @@
     "advancement.eden.adventure.nice_mob_manager.welcome_to_the_village.title": "Welcome to the Village",
     "advancement.eden.adventure.root.description": "Begin your journey through the packs of Explorer's Eden.",
     "advancement.eden.adventure.root.title": "Explorer's Eden",
-    "menu.mob_manager.confirm": "Confirm"
+    "menu.mob_manager.confirm": "Confirm",
+    "option.mob_manager.close": "Close"
 }

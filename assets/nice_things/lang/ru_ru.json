@@ -689,5 +689,10 @@
     "advancement.eden.adventure.nice_things.on_display.title": "On Display",
     "advancement.eden.adventure.nice_things.on_display.description": "Place an item in a Display Case.",
     "item.nice_things.kaleidoscope": "Kaleidoscope",
-    "advancement.eden.adventure.nice_things.gourmet.title": "Gourmet"
+    "advancement.eden.adventure.nice_things.gourmet.title": "Gourmet",
+    "jukebox_song.nice_things.melancholia": "Ryan Creep - MELANCHOLIA",
+    "block.nice_things.cinnabar_display_case": "Cinnabar Display Case",
+    "block.nice_things.dark_prismarine_display_case": "Dark Prismarine Display Case",
+    "block.nice_things.poplar_display_case": "Poplar Display Case",
+    "block.nice_things.sulfur_display_case": "Sulfur Display Case"
 }

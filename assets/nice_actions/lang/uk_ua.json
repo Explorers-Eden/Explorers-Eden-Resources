@@ -226,5 +226,6 @@
     "item.nice_actions.fire_resistance_stew": "Fire Resistance Stew",
     "item.nice_actions.hero_of_the_village_stew": "Hero of the Village Stew",
     "option.nice_actions.animals_bred": "Animals Bred",
-    "option.nice_actions.back": "Back"
+    "option.nice_actions.back": "Back",
+    "option.nice_actions.close": "Close"
 }
