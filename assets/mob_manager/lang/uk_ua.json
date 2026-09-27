@@ -44,7 +44,6 @@
     "menu.mob_manager.wandering_trader.title": "Налаштування мандрівного торговця",
     "menu.mob_manager.equipment.misc.description": "Налаштувати слот:",
     "option.mob_manager.witherskulldrop": "2-й череп з Візер-скелету",
-    "option.mob_manager.villager.follow": "Селяни слідують за гравцями, які тримають смарагд",
     "option.mob_manager.villager_pet": "Шанс зробити селянина улюбленцем",
     "option.mob_manager.allow_mob": "Дозволити моба",
     "option.mob_manager.main.passive.tooltip": "Налаштувати параметри для всіх або окремих пасивних мобів.",
