@@ -196,5 +196,6 @@
     "advancement.eden.adventure.root.description": "Begin your journey through the packs of Explorer's Eden.",
     "advancement.eden.adventure.root.title": "Explorer's Eden",
     "menu.mob_manager.confirm": "Confirm",
-    "option.mob_manager.close": "Close"
+    "option.mob_manager.close": "Close",
+    "option.mob_manager.villager.follow": "Villager Follow Players Holding Emerald"
 }

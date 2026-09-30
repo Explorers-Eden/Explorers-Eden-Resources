@@ -227,5 +227,19 @@
     "advancement.eden.adventure.nice_actions.shocking_style.title": "Shocking Style",
     "advancement.eden.adventure.nice_actions.shocking_style.description": "Equip a lightning rod as a hat.",
     "advancement.eden.adventure.nice_actions.take_a_seat.title": "Take a Seat",
-    "advancement.eden.adventure.nice_actions.take_a_seat.description": "Sit down for the first time."
+    "advancement.eden.adventure.nice_actions.take_a_seat.description": "Sit down for the first time.",
+    "option.nice_actions.back": "Teleport Back",
+    "option.nice_actions.back.tooltip": "Return to where you were before your last random, spawn or home teleport.",
+    "option.nice_actions.back_cooldown": "TP Back Cooldown in Seconds",
+    "option.nice_actions.warmup": "Teleport Warm-Up in Seconds",
+    "text.nice_actions.no_back": "No previous location.",
+    "text.nice_actions.back_cooldown": "Back teleport is on cooldown.",
+    "text.nice_actions.back_successful": "Teleported back.",
+    "text.nice_actions.warmup": "Teleporting in",
+    "text.nice_actions.warmup_cancelled": "Teleport cancelled.",
+    "text.nice_actions.set_home_confirm": "You already have a home set. Replace it with your current position?",
+    "text.nice_actions.set_home_current": "Current Home: ",
+    "option.nice_actions.set_home_replace": "Replace",
+    "option.nice_actions.set_home_keep": "Cancel",
+    "text.nice_actions.events.leaderboard": "Event Leaderboard"
 }
