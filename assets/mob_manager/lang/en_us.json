@@ -196,5 +196,6 @@
     "advancement.eden.adventure.nice_mob_manager.welcome_to_the_village.title": "Welcome to the Village",
     "advancement.eden.adventure.nice_mob_manager.welcome_to_the_village.description": "Entered a village.",
     "advancement.eden.adventure.nice_mob_manager.not_so_common.title": "Not So Common",
-    "advancement.eden.adventure.nice_mob_manager.not_so_common.description": "Defeat a Common rarity mob."
+    "advancement.eden.adventure.nice_mob_manager.not_so_common.description": "Defeat a Common rarity mob.",
+    "option.mob_manager.back": "Back"
 }

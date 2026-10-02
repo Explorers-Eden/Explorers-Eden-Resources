@@ -227,5 +227,18 @@
     "item.nice_actions.hero_of_the_village_stew": "Hero of the Village Stew",
     "option.nice_actions.animals_bred": "Animals Bred",
     "option.nice_actions.back": "Back",
-    "option.nice_actions.close": "Close"
+    "option.nice_actions.close": "Close",
+    "option.nice_actions.back_cooldown": "TP Back Cooldown in Seconds",
+    "option.nice_actions.back.tooltip": "Return to where you were before your last random, spawn or home teleport.",
+    "option.nice_actions.set_home_keep": "Cancel",
+    "option.nice_actions.set_home_replace": "Replace",
+    "option.nice_actions.warmup": "Teleport Warm-Up in Seconds",
+    "text.nice_actions.back_cooldown": "Back teleport is on cooldown.",
+    "text.nice_actions.back_successful": "Teleported back.",
+    "text.nice_actions.events.leaderboard": "Event Leaderboard",
+    "text.nice_actions.no_back": "No previous location.",
+    "text.nice_actions.set_home_confirm": "You already have a home set. Replace it with your current position?",
+    "text.nice_actions.set_home_current": "Current Home: ",
+    "text.nice_actions.warmup": "Teleporting in",
+    "text.nice_actions.warmup_cancelled": "Teleport cancelled."
 }

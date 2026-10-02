@@ -12,5 +12,6 @@
   "advancement.eden.adventure.nice_name_tags.solid_ground.title": "Solid Ground",
   "advancement.eden.adventure.nice_name_tags.solid_ground.description": "Turn an entity's collision back on with a name tag.",
   "advancement.eden.adventure.nice_name_tags.cold_feet.title": "Cold Feet",
-  "advancement.eden.adventure.nice_name_tags.cold_feet.description": "Stop a Piglin, Piglin Brute, or Hoglin from zombifying with a name tag."
+  "advancement.eden.adventure.nice_name_tags.cold_feet.description": "Stop a Piglin, Piglin Brute, or Hoglin from zombifying with a name tag.",
+  "option.name_tags.back": "Back"
 }
