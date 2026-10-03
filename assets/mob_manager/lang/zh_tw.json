@@ -197,5 +197,6 @@
     "advancement.eden.adventure.root.title": "Explorer's Eden",
     "menu.mob_manager.confirm": "Confirm",
     "option.mob_manager.close": "Close",
-    "option.mob_manager.villager.follow": "Villager Follow Players Holding Emerald"
+    "option.mob_manager.villager.follow": "Villager Follow Players Holding Emerald",
+    "option.mob_manager.back": "Back"
 }

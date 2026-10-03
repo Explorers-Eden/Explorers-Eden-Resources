@@ -197,5 +197,6 @@
     "advancement.eden.adventure.root.title": "Explorer's Eden",
     "menu.mob_manager.confirm": "Confirm",
     "option.mob_manager.close": "Close",
-    "option.mob_manager.villager.follow": "Жители следуют за игроками, держащими изумруд"
+    "option.mob_manager.villager.follow": "Жители следуют за игроками, держащими изумруд",
+    "option.mob_manager.back": "Back"
 }

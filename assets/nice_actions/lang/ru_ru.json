@@ -240,5 +240,7 @@
     "text.nice_actions.set_home_confirm": "You already have a home set. Replace it with your current position?",
     "text.nice_actions.set_home_current": "Current Home: ",
     "text.nice_actions.warmup": "Teleporting in",
-    "text.nice_actions.warmup_cancelled": "Teleport cancelled."
+    "text.nice_actions.warmup_cancelled": "Teleport cancelled.",
+    "option.nice_actions.teleport_back": "Teleport Back",
+    "option.nice_actions.teleport_back.tooltip": "Return to where you were before your last random, spawn or home teleport."
 }

@@ -2712,5 +2712,6 @@
     "advancement.eden.adventure.fabled_roots.trophy_case.description": "Collect all 9 mob shells.",
     "advancement.eden.adventure.fabled_roots.x_marks_the_spot.title": "X Marks the Spot",
     "advancement.eden.adventure.fabled_roots.x_marks_the_spot.description": "Follow a race's treasure map to its treasure.",
-    "option.fabled_roots.close": "Close"
+    "option.fabled_roots.close": "Close",
+    "option.fabled_roots.back": "Back"
 }
