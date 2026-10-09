@@ -242,5 +242,6 @@
     "text.nice_actions.warmup": "Teleporting in",
     "text.nice_actions.warmup_cancelled": "Teleport cancelled.",
     "option.nice_actions.teleport_back": "Teleport Back",
-    "option.nice_actions.teleport_back.tooltip": "Return to where you were before your last random, spawn or home teleport."
+    "option.nice_actions.teleport_back.tooltip": "Return to where you were before your last random, spawn or home teleport.",
+    "option.nice_actions.new_day_msg": "New Day Message"
 }
